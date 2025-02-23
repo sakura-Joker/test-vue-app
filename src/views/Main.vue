@@ -1,17 +1,19 @@
 <script setup>
 import CommonAside from "@/components/CommonAside.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
+import CommonTab from "@/components/CommonTab.vue";
 </script>
 
 <template>
   <div class="common-layout">
     <el-container class="lay-container">
       <!-- 自定义左侧的组件 -->
-      <common-aside  />
+      <common-aside />
       <el-container>
         <el-header class="el-header">
           <common-header></common-header>
         </el-header>
+        <common-tab></common-tab>
         <el-main class="right-main">
           <router-view></router-view>
         </el-main>

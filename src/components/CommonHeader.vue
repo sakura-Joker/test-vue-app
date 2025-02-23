@@ -1,5 +1,7 @@
-<script lang="ts" setup>
+<script setup>
 import { useAllDataStore } from "@/stores";
+import { useRouter } from "vue-router";
+import { computed } from "vue";
 const getImageUrl = (user) => {
   return new URL(`../assets/images/${user}.png`, import.meta.url).href;
 };
@@ -7,6 +9,12 @@ const store = useAllDataStore();
 const handleCollapse = () => {
   store.state.isCollapse = !store.state.isCollapse;
 };
+const router = useRouter();
+const handleLoginOut = () => {
+  store.clean();
+  router.push("/login");
+};
+const current = computed(() => store.state.currentMenu);
 </script>
 
 <template>
@@ -17,6 +25,9 @@ const handleCollapse = () => {
       </el-button>
       <el-breadcrumb separator="/" class="bread">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="current" :to="current.path">{{
+          current.label
+        }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="r-content">
@@ -27,7 +38,7 @@ const handleCollapse = () => {
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click="handleLoginOut">退出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>

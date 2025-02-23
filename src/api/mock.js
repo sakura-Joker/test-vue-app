@@ -1,0 +1,12 @@
+import Mock from "mockjs";
+import homeApi from "./mockData/home";
+import UserApi from "./mockData/user";
+import PermissionApi from "./mockData/permission";
+Mock.mock(/api\/home\/getTableData/, "get", homeApi.getTableData);
+Mock.mock(/api\/home\/getCountData/, "get", homeApi.getCountData);
+Mock.mock(/api\/home\/getChartData/, "get", homeApi.getChartData);
+Mock.mock(/api\/home\/getUserData/, "get", UserApi.getUserList);
+Mock.mock(/api\/user\/deleteUser/, "get", UserApi.deleteUser);
+Mock.mock(/api\/user\/addUser/, "post", UserApi.createUser);
+Mock.mock(/api\/user\/editUser/, "post", UserApi.updateUser);
+Mock.mock(/api\/permission\/getMenu/, "post", PermissionApi.getMenu);
